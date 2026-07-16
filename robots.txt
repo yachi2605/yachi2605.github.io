@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yachi2605.github.io/sitemap.xml
