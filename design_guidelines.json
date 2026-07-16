@@ -1,0 +1,156 @@
+{
+  "theme": "dark",
+  "identity": "AI Systems Laboratory - confident, minimal, technical, deliberate",
+  "colors": {
+    "background": {
+      "primary": "#0d0f1e",
+      "surface": "#14172a",
+      "panel": "rgba(20, 23, 42, 0.7)"
+    },
+    "text": {
+      "primary": "#ffffff",
+      "secondary": "#a3a3a3",
+      "muted": "#6b7280"
+    },
+    "accent": {
+      "blue": "#5B73FF",
+      "blue_muted": "rgba(91, 115, 255, 0.2)"
+    },
+    "status": {
+      "live_green": "#4ADE80",
+      "live_green_muted": "rgba(74, 222, 128, 0.2)",
+      "border": "rgba(255, 255, 255, 0.1)"
+    }
+  },
+  "typography": {
+    "fonts": {
+      "heading": "Cormorant Garamond, serif",
+      "body": "Inter, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "scale": {
+      "h1": "text-5xl md:text-7xl lg:text-8xl tracking-tighter leading-none",
+      "h2": "text-3xl md:text-5xl tracking-tight leading-tight",
+      "h3": "text-2xl md:text-3xl tracking-tight",
+      "body": "text-base md:text-lg leading-relaxed",
+      "mono_sm": "text-xs md:text-sm tracking-tight"
+    },
+    "rules": {
+      "headlines": "font-serif font-light or regular, extremely tight tracking",
+      "body": "font-sans font-light, generous line height",
+      "system_text": "font-mono text-status-live_green or text-accent-blue uppercase tracking-widest text-xs"
+    }
+  },
+  "layout_and_spacing": {
+    "container": "max-w-7xl mx-auto px-6 md:px-12",
+    "section_padding": "py-24 md:py-40",
+    "gap": "gap-8 md:gap-16",
+    "bento": "grid grid-cols-1 md:grid-cols-12 gap-6"
+  },
+  "components": {
+    "hero": {
+      "type": "kinetic",
+      "rules": "No 3D globe. Use framer-motion for line-by-line masked text reveal. Overflow hidden on lines, y: 100% -> 0. Minimal copy. Include a subtle parallax background element (like dark ASCII art or technical grid pattern). Align text left.",
+      "ctas": "Two buttons: 'See Work' (Primary pill, #5B73FF background) and 'Resume' (Secondary outline, pure white border)."
+    },
+    "system_status_panel": {
+      "style": "Neo-brutalist technical card. Monospace text (JetBrains Mono).",
+      "content": "Key:Value pairs (Role, Location, Visa, Shipped-Count). Status: 'Actively Interviewing' with a pulsing green dot (#4ADE80 bg, animate-pulse).",
+      "border": "1px solid rgba(255,255,255,0.1), flat background, no shadows."
+    },
+    "tech_icon_field": {
+      "interaction": "Floating icons that gently repel from the cursor using framer-motion springs or simple math in requestAnimationFrame.",
+      "icons": "10 real logos: Python, PostgreSQL, PyTorch, AWS, FastAPI, Docker, MLflow, Neo4j, GitHub, XGBoost. Use react-icons or lucide-react approximations if specific logos are unavailable, but prioritize actual brand svgs.",
+      "opacity": "Default opacity 0.3, hover/near cursor opacity 1.0."
+    },
+    "terminal_easter_egg": {
+      "trigger": "Floating minimal button (bottom right) or backtick (`).",
+      "style": "Retro-futuristic terminal overlay. #0d0f1e background, 1px #5B73FF border, #4ADE80 text.",
+      "commands": "help, about, experience, projects, skills, credentials, resume, contact, whoami, clear, theme, coffee, sudo hire yachi, achievements."
+    },
+    "command_palette": {
+      "trigger": "⌘K / Ctrl+K",
+      "library": "cmdk (or shadcn command)",
+      "style": "Dark glassmorphism overlay. backdrop-blur-xl bg-[#0d0f1e]/80 border border-white/10."
+    },
+    "projects_section": {
+      "style": "Products showcase, not just repos.",
+      "tabs": "All / Live Products / GenAI & Agents / Research.",
+      "cards": "Cinematic. 3D tilt-on-hover using framer-motion. Use real screenshots.",
+      "architecture_explorer": "For RentPilot. Replace standard image with an interactive pipeline (Client -> API -> AI Layer -> Data Layer -> Auth). Click nodes to reveal tech/decisions."
+    },
+    "labelmaster_case_study": {
+      "style": "Data-heavy dashboard card. Dark grey/blue background.",
+      "chart": "Use Recharts. Bar chart comparing LSTM vs XGBoost WAPE across 8 departments. Minimal axes, highlight XGBoost in #4ADE80, LSTM in #a3a3a3."
+    },
+    "interactive_timeline": {
+      "style": "Horizontal scrolling or sticky vertical scroll timeline (2022-2026). Monospace years, Serif headlines for roles.",
+      "interaction": "Reveal text on scroll using framer-motion useScroll."
+    },
+    "skills_layout": {
+      "tiers": {
+        "core": "Large distinct cards with subtle blue borders.",
+        "daily": "Pill-shaped containers, flat background.",
+        "supporting": "Compact tags, monospace text, extremely minimal."
+      }
+    },
+    "marquee": {
+      "style": "One slow editorial marquee using react-fast-marquee. Font-serif, very slow speed, muted text (#a3a3a3 or #ffffff/20)."
+    },
+    "contact_form": {
+      "style": "Technical, flat inputs. Bottom border only (border-b) or highly structured bento layout. No standard generic boxes.",
+      "links": "Email, LinkedIn, GitHub listed in monospace."
+    }
+  },
+  "motion_and_interaction": {
+    "scroll": "MUST use Lenis (@studio-freight/lenis) for smooth momentum scrolling.",
+    "timings": {
+      "reveal": "duration: 0.8, ease: [0.16, 1, 0.3, 1] (custom spring-like bezier)",
+      "stagger": "0.1s to 0.2s between children"
+    },
+    "toasts": "Achievement/Exploration toasts using Sonner. Triggered when discovering the terminal or clicking specific nodes. Dark mode styled."
+  },
+  "images": {
+    "WanderMind_AI": {
+      "url": "https://images.unsplash.com/photo-1597773150796-e5c14ebecbf5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwxfHxkYXJrJTIwYWJzdHJhY3QlMjBmbHVpZHxlbnwwfHx8fDE3ODQxNjE3Mjh8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Dark abstract fluid pattern for WanderMind AI placeholder"
+    },
+    "PulseBoard_AI": {
+      "url": "https://images.unsplash.com/photo-1644088379091-d574269d422f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxNzV8MHwxfHNlYXJjaHwzfHxkYXJrJTIwYWJzdHJhY3QlMjBkYXRhfGVufDB8fHx8MTc4NDE2MTcyOXww&ixlib=rb-4.1.0&q=85",
+      "description": "Dark abstract data visualization for PulseBoard AI placeholder"
+    }
+  },
+  "libraries": [
+    "framer-motion",
+    "lucide-react",
+    "react-icons",
+    "recharts",
+    "sonner",
+    "cmdk",
+    "@studio-freight/lenis",
+    "react-fast-marquee"
+  ],
+  "instructions_to_main_agent": [
+    "Strictly follow the color palette. No random hex codes.",
+    "Do NOT use gradients anywhere. Backgrounds should be flat #0d0f1e or #14172a.",
+    "Typography strictly requires: Cormorant Garamond (headings), Inter (body), JetBrains Mono (tech details). Fetch via Google Fonts in index.css.",
+    "No 3D globe in the hero section.",
+    "Ensure 'data-testid' is present on all interactive elements.",
+    "Do NOT use transparent backgrounds for dropdowns or modals; use solid #14172a or heavy backdrop-blur.",
+    "Install mentioned libraries if they are missing.",
+    "Use Framer Motion for all entrance animations and the kinetic hero text reveal.",
+    "Implement the Command Palette (Cmd+K) using cmdk.",
+    "Ensure the contact form integrates seamlessly.",
+    "All components must be functional React (.js or .jsx) files, using Tailwind for styling."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You tend to converge toward generic outputs. Avoid 'AI slop' aesthetic.",
+    "DO NOT use dark colors as gradients. Use them as flat solid backgrounds.",
+    "Create depth through layered design elements with z-index hierarchy and 1px borders.",
+    "You MUST NOT apply universal transition (e.g., transition: all). Add transitions for specific properties.",
+    "Every interaction needs micro-animations (hover states, transitions).",
+    "Use 2-3x more spacing than feels comfortable.",
+    "NEVER use placeholder text for images. Use the provided Unsplash URLs.",
+    "Ensure the final website feels like an 'award-winning' portfolio."
+  ]
+}

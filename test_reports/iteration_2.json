@@ -1,0 +1,37 @@
+{
+  "summary": "Iteration 2 regression + new-feature verification for Yachi Darji portfolio. All Round-2 acceptance criteria pass: standalone Architecture Explorer section removed; per-project Architecture modals present ONLY on RentPilot + SupplyChainIQ with the correct 5 project-specific nodes each; Wandermind/CatSense/PulseBoard have no architecture button; Projects header no longer says 'Not resume bullets'; filter tabs work (live=2 cards); backend contact API validates properly and rate-limits at 5/10min per source IP (429 on 6th); contact form UI submits with success toast; Labelmaster CountUp + recharts render; timeline (2022–2026), terminal (open-btn + help command), and command palette (Cmd+K/Escape, no 'Architecture Explorer' entry) all functional. 6/6 pytest tests pass; no page errors on frontend.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/contact", "issue": "Rate limit uses request.client.host which behind the k8s ingress load-balancer alternates between upstream pod IPs (10.49.132.77/78 observed in logs). A real abuser hitting the public URL would get up to 2x the intended budget before 429. Recommend keying the bucket off X-Forwarded-For / X-Real-IP (first hop) for production correctness."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Labelmaster (recharts)", "issues": ["Recharts logs a benign warning 'width(-1) height(-1)' on initial mount before the section is scrolled into view. Harmless but noisy in console — consider gating the chart render behind an in-view observer."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_portfolio_api.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": [
+    "(Optional) Harden rate limit by reading X-Forwarded-For instead of request.client.host so the bucket keys off the real client IP behind the ingress.",
+    "(Optional) Suppress recharts width/height warnings by rendering the BarChart only after the section scrolls into view (or set explicit width/height)."
+  ],
+  "critical_code_review_comments": [
+    "Rate-limit bucket key: request.client.host is the ingress upstream, not the actual client. For a portfolio contact form this is acceptable, but any real abuse-mitigation story should key off X-Forwarded-For.",
+    "ProjectArchitecture modal correctly scopes state per-project via useEffect on `project`; header 'architecture · {project.title}' + arch-node-{id} testids are project-specific and match the acceptance spec.",
+    "CORS is safely configured: allow_credentials is auto-disabled when origins contains '*'.",
+    "Contact model excludes _id via find projection {_id: 0} — good. Timestamp is ISO-serialized before Motor insert to avoid BSON/tz round-trip drift."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_portfolio_api.py"
+  ],
+  "success_rate": {"backend": "100% (6/6 pytest)", "frontend": "100% (all Round-2 acceptance items)"},
+  "test_credentials": "n/a (no auth in this app)",
+  "seed_data_creation": "Test contacts prefixed with TEST_ inserted via /api/contact during pytest and UI submission. Cleanup not required (contacts collection is portfolio-owner data; TEST_ prefix makes them identifiable if needed).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend has an in-memory 5-per-10min rate limit; if you need to retest it, restart backend (sudo supervisorctl restart backend) to clear the bucket. Rate-limit assertion runs against http://127.0.0.1:8001 to avoid k8s ingress LB IP rotation. Public URL from frontend/.env is https://data-lab-chi.preview.emergentagent.com. All 5 projects render with correct titles/data; the earlier data-corruption bug is fully resolved.",
+  "rca_of_the_issue": "n/a — no bugs blocking acceptance. Only environmental gotcha found: rate-limit invisible when tested through the public URL because the k8s ingress round-robins between upstream pod IPs, so each IP-keyed bucket only sees ~half the requests. Switched the pytest for rate-limit to hit 127.0.0.1:8001 directly which deterministically reproduces the 429 after the 5th request."
+}

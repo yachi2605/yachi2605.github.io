@@ -1,0 +1,24 @@
+{
+  "summary": "First-finish smoke test of Yachi Darji portfolio (backend + frontend). Backend contact API works with EmailStr validation. All frontend hero, nav, projects filter+cards+achievement, architecture explorer (5 nodes), timeline (5 years), terminal (button + backtick + commands help/whoami/projects showing CatSense/clear/sudo hire yachi), Command Palette (Cmd+K + Escape), and contact form submit (success toast 'message.transmitted' + achievement 'Project details opened') all pass with no console errors.",
+  "tested_scope": ["frontend", "backend", "integration"],
+  "passed": [
+    "GET /api/ -> 200 {'message':'AI Systems Lab · Portfolio API'}",
+    "POST /api/contact valid payload -> 200 with created object (id, timestamp)",
+    "POST /api/contact invalid email -> 422 EmailStr validation error",
+    "Homepage loads, no console/page errors, hero-name='Yachi Darji.', system-status-panel visible, hero-cta-work + hero-cta-resume visible",
+    "Nav testids present (nav-about/work/skills/contact) and clickable",
+    "Projects filters (all/live/genai/research) toggle; 5 project cards render (project-rentpilot, etc.); clicking card triggers achievement toast 'Project details opened · 1/7 discovered'",
+    "Architecture Explorer: all 5 nodes (client/api/ai/data/auth) clickable",
+    "Timeline: buttons timeline-2022..2026 all clickable",
+    "Terminal opens via floating $ TERMINAL button; commands help/whoami/projects/clear work; 'projects' output contains 'CatSense'; 'sudo hire yachi' closes terminal",
+    "Terminal opens via backtick key when body has focus",
+    "Command Palette opens via Cmd+K, palette-input accepts input, closes on Escape",
+    "Contact form submits successfully - Sonner toast 'message.transmitted' displayed and record persisted (verified via curl also)"
+  ],
+  "failed": [],
+  "action_items": [],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "retest_needed": false,
+  "full_testing_deferred": true,
+  "notes": "Only minor observation: project card testids are `project-{id}` (e.g., project-rentpilot) rather than `project-card-{id}` — not a bug, just noting for downstream tests. Achievement toast system verified. No mocked APIs. CORS OK from public URL."
+}
